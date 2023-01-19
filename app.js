@@ -7,6 +7,10 @@ const port = process.env.PORT || 3001;
 
 const app = express();
 
+app.set('view engine','ejs');
+//configura la carpeta estatica del proyecto
+app.use(express.static('public'));
+
 app.use(morgan('dev'));
 
 app.use(routerMain);
