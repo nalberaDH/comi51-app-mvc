@@ -8,17 +8,31 @@
     <title>Detail</title>
 </head>
 <body>
-    
     <h2>User Detail</h2>
-    <div class="card">
-        <img src="<%= user.img %>" alt="">
-        <p>
-            Name: <%= user.name %>
-        </p>
-        <p>
-            Age: <%= user.age %>
-        </p>
-    </div>
+    <% if(Array.isArray(user)){%>
+        <% for(let i=0;i < user.length; i++){%>
+            <div class="card">
+                <img src="<%= user[i].img %>" alt="">
+                <p>
+                    Name: <%= user[i].name %>
+                </p>
+                <p>
+                    Age: <%= user[i].age %>
+                </p>
+            </div>
+        <%}%>    
+    <%}else{%>
+        <div class="card">
+            <img src="<%= user.img %>" alt="">
+            <p>
+                Name: <%= user.name %>
+            </p>
+            <p>
+                Age: <%= user.age %>
+            </p>
+        </div>
+    <%}%>
+    
     <%- include('partials/header.ejs') %>
     <p>
         "asdad"

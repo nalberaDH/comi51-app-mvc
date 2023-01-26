@@ -1,10 +1,10 @@
 const users = [
-    // {
-    //     id: 1,
-    //     name: "Juan",
-    //     age: 35,
-    //     img: 'https://randomuser.me/api/portraits/men/46.jpg'
-    // },
+    {
+        id: 1,
+        name: "Juan",
+        age: 35,
+        img: 'https://randomuser.me/api/portraits/men/46.jpg'
+    },
     {
         id: 2,
         name: "Romina",
@@ -23,7 +23,12 @@ const users = [
         age: 20,
         img: 'https://randomuser.me/api/portraits/men/23.jpg'
     },
-
+    {
+        id: 5,
+        name: "Juannnnnnnnn",
+        age: 35,
+        img: 'https://randomuser.me/api/portraits/men/48.jpg'
+    },
 ];
 
 module.exports = users;
