@@ -22,4 +22,5 @@ p{
     align-content: center;
     align-items: center;
     flex-direction: column;
+    padding-top: 60px;
 }

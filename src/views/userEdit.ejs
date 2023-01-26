@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New User</title>
+</head>
+<body>
+    <h2>New User</h2>
+    <form method="POST" action="/user-edit?_method=PUT">
+        <div>
+            <img src="<%= userEdit.img%>" alt=""><br>
+            <input type="text" name="img" id="" value="<%= userEdit.img%>">
+        </div>
+        <div>
+            <label for="">Id</label>
+            <input type="text" name="id" id="" readonly="true" value="<%= userEdit.id%>">
+        </div>
+        <div>
+            <label for="">Name</label>
+            <input type="text" name="name" id="" value="<%= userEdit.name%>">
+        </div>
+        <div>
+            <label for="">Age</label>
+            <input type="text" name="age" id="" value="<%= userEdit.age%>">
+        </div>
+        
+        <button type="submit" >Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+</body>
+</html>
