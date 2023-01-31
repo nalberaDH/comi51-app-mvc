@@ -34,20 +34,26 @@ const search = (req,res) =>{
 const formNewUser = (req,res) => {
     res.render(path.join(__dirname,'../views/formNewUser'));
 };
+
 const postUser = (req,res) => {
     const {
         name,
         age,
-        img
     } = req.body;
-
+    
+    const image = req.file ? req.file.filename : '';
+    let newImage;
+    
+    if(image.length > 0){
+        newImage = `images/usuarios/${image}`;
+    }
     const newId = users[users.length - 1].id + 1;
 
     const obj = {
         id: newId,
         name,
         age,
-        img
+        img: newImage
     };
 
     users.push(obj);

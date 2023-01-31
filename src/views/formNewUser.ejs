@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>New User</h2>
-    <form method="POST" action="/new-user">
+    <form method="POST" action="/new-user" enctype="multipart/form-data">
         <div>
             <label for="">Name</label>
             <input type="text" name="name" id="">
@@ -19,7 +19,7 @@
         </div>
         <div>
             <label for="">Avatar</label>
-            <input type="text" name="img" id="">
+            <input type="file" name="img" id="">
         </div>
         <button type="submit" >Submit</button>
         <button type="reset">Reset</button>
