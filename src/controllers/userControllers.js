@@ -1,6 +1,6 @@
 const users = require('../database/users');
 const path = require('path');
-
+const { validationResult } = require('express-validator');
 
 
 const getAllUsers = (req,res) => {
@@ -36,28 +36,34 @@ const formNewUser = (req,res) => {
 };
 
 const postUser = (req,res) => {
-    const {
-        name,
-        age,
-    } = req.body;
+    const errors = validationResult(req);
+    if(errors.isEmpty()){
+
+        const {
+            name,
+            age,
+        } = req.body;
+        
+        const image = req.file ? req.file.filename : '';
+        let newImage;
+        
+        if(image.length > 0){
+            newImage = `images/usuarios/${image}`;
+        }
+        const newId = users[users.length - 1].id + 1;
     
-    const image = req.file ? req.file.filename : '';
-    let newImage;
+        const obj = {
+            id: newId,
+            name,
+            age,
+            img: newImage
+        };
     
-    if(image.length > 0){
-        newImage = `images/usuarios/${image}`;
+        users.push(obj);
+        res.redirect('/users');
+    }else{
+        res.render(path.join(__dirname,'../views/formNewUser'),{errors: errors.array(), values: req.body});
     }
-    const newId = users[users.length - 1].id + 1;
-
-    const obj = {
-        id: newId,
-        name,
-        age,
-        img: newImage
-    };
-
-    users.push(obj);
-    res.redirect('/users');
 
 };
 
@@ -68,10 +74,14 @@ const userEdit = (req,res) => {
 
     res.render(path.join(__dirname,'../views/userEdit'),{userEdit})
 
+};
+
+const admin = (req, res) => {
+    res.render(path.join(__dirname,'../views/admin'));
 }
 
 const editConfirm = (req,res) => {
-    
+   
     users.forEach(elem => {
         if(elem.id == req.body.id){
             elem.name = req.body.name;
@@ -90,5 +100,6 @@ module.exports = {
     formNewUser,
     postUser,
     userEdit,
-    editConfirm
+    editConfirm,
+    admin
 };
