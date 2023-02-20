@@ -1,6 +1,23 @@
 const express = require('express');
-const {getAllUsers, getUserId, search, formNewUser, postUser, userEdit, editConfirm} = require('../controllers/userControllers');
+const {getAllUsers,
+    getUserId,
+    search,
+    formNewUser,
+    postUser,
+    userEdit,
+    editConfirm,
+    admin
+} = require('../controllers/userControllers');
 const routerUser = express.Router();
+const isAdmin = require('../middleware/adminMiddleware');
+
+const {body} = require('express-validator');
+
+const validateForm = [
+    body('name').notEmpty().withMessage('El nombre es requerido'),
+    body('age').notEmpty().withMessage('La edad es requerida'),
+    
+]
 
 const path = require('path');
 const multer = require('multer');
@@ -24,11 +41,11 @@ routerUser.get('/user/:id', getUserId);
 routerUser.get('/search', search);
 
 routerUser.get('/new-user',formNewUser);
-routerUser.post('/new-user',upload.single('img') ,postUser);
+routerUser.post('/new-user', upload.single('img'),validateForm ,postUser);
 
 routerUser.get('/user-edit/:id', userEdit);
-routerUser.put('/user-edit',upload.single('img') ,editConfirm)
+routerUser.put('/user-edit', upload.single('img'),validateForm, editConfirm)
 
-
+routerUser.get('/admin',isAdmin ,admin);
 
 module.exports = routerUser;
